@@ -1,0 +1,3 @@
+Cada tela tera uma pasta própria contendo:
+    1 arquivo: index.js
+    1 arquivo: styles.js
