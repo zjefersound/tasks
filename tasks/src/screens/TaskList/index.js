@@ -8,7 +8,7 @@ import {
     TouchableOpacity,
 } from 'react-native';
 
-//Estilo e visuais
+//Estilo e imagens
 import styles from './styles';
 import todayImage from '../../../assets/imgs/today.jpg';
 import Icon from 'react-native-vector-icons/FontAwesome';
@@ -20,11 +20,13 @@ import 'moment/locale/pt-br';
 
 //componentes
 import Task from '../../components/Task';
+import AddTask from '../AddTask';
 
 
 export default class TaskList extends Component {
     state = {
         showDoneTasks: true,
+        showAddTask: true,
         visibleTasks: [],
         tasks: [
             {
@@ -77,12 +79,14 @@ export default class TaskList extends Component {
         const today = moment().locale('pt-br').format('ddd, D [de] MMMM');
         return (
             <View style = { styles.container }>
-                <StatusBar backgroundColor = { commonStyles.statusBarColor.today } />
+                <AddTask isVisible = { this.state.showAddTask }
+                    onCancel = { () => this.setState({ showAddTask: false}) }/>
+                <StatusBar backgroundColor = { commonStyles.colors.today } />
                 <ImageBackground source = { todayImage }
                     style = { styles.background }>
                     <View style = { styles.iconBar }>
                         <TouchableOpacity onPress = { this.toggleFilter }>
-                            <Icon name = { this.state.showDoneTasks ? 'eye' : 'eye-slash' } 
+                            <Icon name = { this.state.showDoneTasks ? 'eye-slash' : 'eye' } 
                                 size = {20}
                                 color = { commonStyles.colors.secondary }/>
                         </TouchableOpacity>
