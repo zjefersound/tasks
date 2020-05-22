@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform, } from 'react-native';
 import commonStyles from '../../commonStyles';
 
 const styles = StyleSheet.create({
@@ -29,6 +29,12 @@ const styles = StyleSheet.create({
         fontSize: 20,
         marginLeft: 20,
         marginBottom: 30,
+    },
+    iconBar: {
+        flexDirection: 'row',
+        justifyContent: 'flex-end',
+        marginHorizontal: 20,
+        marginTop: Platform.OS === 'ios' ? 40 : 10
     },
 });
 

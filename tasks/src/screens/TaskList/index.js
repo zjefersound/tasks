@@ -1,9 +1,18 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, StatusBar} from 'react-native';
+import { 
+    View,
+    Text, 
+    ImageBackground, 
+    StatusBar, 
+    FlatList,
+    TouchableOpacity,
+} from 'react-native';
 
 //Estilo e visuais
 import styles from './styles';
 import todayImage from '../../../assets/imgs/today.jpg';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import commonStyles from '../../commonStyles';
 
 //funcionalidades
 import moment from 'moment';
@@ -14,25 +23,80 @@ import Task from '../../components/Task';
 
 
 export default class TaskList extends Component {
+    state = {
+        showDoneTasks: true,
+        visibleTasks: [],
+        tasks: [
+            {
+                id: Math.random(),
+                desc: 'Comprar livro de Receitas',
+                estimateAt: new Date(),
+                doneAt: new Date(),
+            },
+            {
+                id: Math.random(),
+                desc: 'Roubar livro de Receitas',
+                estimateAt: new Date(),
+                doneAt: null,
+            },
+        ],
+    };
+
+    componentDidMount = () => {
+        this.filterTasks();
+    }
+
+    toggleFilter = () => {
+        this.setState({ showDoneTasks: !this.state.showDoneTasks}, this.filterTasks);
+    };
+
+    filterTasks = () => {
+        let visibleTasks = null;
+
+        if( this.state.showDoneTasks ) {
+            visibleTasks = [ ...this.state.tasks ];
+        }else{
+            const pending = task => task.doneAt === null;
+            visibleTasks = this.state.tasks.filter(pending);
+        }
+        
+        this.setState({ visibleTasks });
+    };
+
+    toggleTask = taskId => {
+        const tasks = [ ...this.state.tasks ];
+        tasks.forEach(task => {
+            if( task.id === taskId ) {
+                task.doneAt = task.doneAt ? null : new Date();
+            }
+        });
+        this.setState({ tasks }, this.filterTasks);
+    };
+
     render() {
         const today = moment().locale('pt-br').format('ddd, D [de] MMMM');
         return (
             <View style = { styles.container }>
-                <StatusBar backgroundColor = '#282828' />
+                <StatusBar backgroundColor = { commonStyles.statusBarColor.today } />
                 <ImageBackground source = { todayImage }
                     style = { styles.background }>
+                    <View style = { styles.iconBar }>
+                        <TouchableOpacity onPress = { this.toggleFilter }>
+                            <Icon name = { this.state.showDoneTasks ? 'eye' : 'eye-slash' } 
+                                size = {20}
+                                color = { commonStyles.colors.secondary }/>
+                        </TouchableOpacity>
+                    </View>
                     <View style = { styles.titleBar }>
                         <Text style = { styles.title }>Hoje</Text>
                         <Text style = { styles.subtitle }>{ today }</Text>
                     </View>
                 </ImageBackground>
                 <View style = { styles.taskList }>
-                    <Task desc = 'Comprar pão' 
-                        estimateAt = { new Date() } 
-                        doneAt = { null } />
-                    <Task desc = 'Limpar a casa' 
-                        estimateAt = { new Date() } 
-                        doneAt = { new Date() } />
+                    <FlatList data = { this.state.visibleTasks } 
+                        keyExtractor = { item => `${item.id}` } 
+                        renderItem = { ({ item }) => 
+                            <Task { ...item } toggleTask = { this.toggleTask }/> }/>
                 </View>
             </View>
         );

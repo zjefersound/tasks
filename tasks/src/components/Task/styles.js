@@ -28,6 +28,16 @@ const styles = StyleSheet.create({
         backgroundColor: '#4D7031',
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    desc: { 
+        fontFamily: commonStyles.fontFamily,
+        color: commonStyles.colors.mainText,
+        fontSize: 15
+    },
+    date: { 
+        fontFamily: commonStyles.fontFamily,
+        color: commonStyles.colors.subText,
+        fontSize: 12
     }
 });
 
