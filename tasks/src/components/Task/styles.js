@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         borderColor: '#AAA',
+        backgroundColor: commonStyles.colors.secondary,
         borderBottomWidth: 1,
         alignItems: 'center',
         paddingVertical: 10,
@@ -38,6 +39,26 @@ const styles = StyleSheet.create({
         fontFamily: commonStyles.fontFamily,
         color: commonStyles.colors.subText,
         fontSize: 12
+    },
+    right: {
+        backgroundColor: '#F11',
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'flex-end',
+        paddingHorizontal: 20,
+    },
+    left: {
+        backgroundColor: '#F11',
+        flexDirection: 'row',
+        alignItems: 'center',
+        flex: 1,
+        paddingHorizontal: 20,
+    },
+    excludeText: {
+        fontFamily: commonStyles.fontFamily,
+        fontSize: 20,
+        color: '#FFF',
+        marginLeft: 10
     }
 });
 

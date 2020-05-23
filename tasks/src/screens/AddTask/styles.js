@@ -46,7 +46,21 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: '#E3E3E3',
         borderRadius: 6,
+        paddingLeft: 15,
+        paddingRight: 10
+    },
+    dateBar: {
+        margin: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
 
+    },
+    date: {
+        fontFamily: commonStyles.fontFamily,
+        fontSize: 20,
+    },
+    date_icon: {
+        marginRight: 10,
     }
 });
 

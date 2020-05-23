@@ -34,8 +34,29 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'flex-end',
         marginHorizontal: 20,
-        marginTop: Platform.OS === 'ios' ? 40 : 10
+        marginTop: Platform.OS === 'ios' ? 30 : 0
     },
+    iconVisible: {
+        paddingVertical: 15,
+        paddingLeft: 10,
+    },
+    addTaskButton: {
+        position: 'absolute',
+        right: 30,
+        bottom: 30,
+        width: 60,
+        height: 60,
+        borderRadius: 30,
+        justifyContent: 'center',
+        alignItems: 'center',
+        backgroundColor: commonStyles.colors.today,
+    },
+    infoMessage: {
+        fontFamily: commonStyles.fontFamily,
+        fontSize: 15,
+        marginTop: 20,
+        textAlign: 'center'
+    }
 });
 
 export default styles;

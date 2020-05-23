@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { 
+    Alert,
     View,
     Text, 
     ImageBackground, 
@@ -17,35 +18,28 @@ import commonStyles from '../../commonStyles';
 //funcionalidades
 import moment from 'moment';
 import 'moment/locale/pt-br';
+import AsyncStorage from '@react-native-community/async-storage';
 
 //componentes
 import Task from '../../components/Task';
 import AddTask from '../AddTask';
 
+const initialState = {
+    showDoneTasks: true,
+    showAddTask: false,
+    visibleTasks: [],
+    tasks: [],
+};
 
 export default class TaskList extends Component {
     state = {
-        showDoneTasks: true,
-        showAddTask: true,
-        visibleTasks: [],
-        tasks: [
-            {
-                id: Math.random(),
-                desc: 'Comprar livro de Receitas',
-                estimateAt: new Date(),
-                doneAt: new Date(),
-            },
-            {
-                id: Math.random(),
-                desc: 'Roubar livro de Receitas',
-                estimateAt: new Date(),
-                doneAt: null,
-            },
-        ],
+        ...initialState
     };
 
-    componentDidMount = () => {
-        this.filterTasks();
+    componentDidMount = async () => {
+        const stateString = await AsyncStorage.getItem('tasksState');
+        const state = JSON.parse(stateString) || initialState;
+        this.setState(state, this.filterTasks );
     }
 
     toggleFilter = () => {
@@ -63,6 +57,7 @@ export default class TaskList extends Component {
         }
         
         this.setState({ visibleTasks });
+        AsyncStorage.setItem('tasksState', JSON.stringify( this.state ));
     };
 
     toggleTask = taskId => {
@@ -75,18 +70,42 @@ export default class TaskList extends Component {
         this.setState({ tasks }, this.filterTasks);
     };
 
+    addTask = newTask => {
+        if( !newTask.desc || !newTask.desc.trim() ) {
+            Alert.alert('Dados inválidos', 'Descrição não informada!');
+            return;
+        }
+
+        const tasks = [ ...this.state.tasks ];
+        tasks.unshift({
+            id: Math.random(),
+            desc: newTask.desc,
+            estimateAt: newTask.date,
+            doneAt: null
+        });
+
+        this.setState({ tasks, showAddTask: false }, this.filterTasks);
+    };
+    deleteTask = id => {
+        const tasks = this.state.tasks.filter(task => task.id !== id);
+        this.setState({ tasks }, this.filterTasks);
+    };
+
     render() {
-        const today = moment().locale('pt-br').format('ddd, D [de] MMMM');
+        const today = moment().locale('pt-br').format('dddd, D [de] MMMM');
         return (
             <View style = { styles.container }>
                 <AddTask isVisible = { this.state.showAddTask }
-                    onCancel = { () => this.setState({ showAddTask: false}) }/>
+                    onCancel = { () => this.setState({ showAddTask: false}) }
+                    onSave = { this.addTask }/>
                 <StatusBar backgroundColor = { commonStyles.colors.today } />
                 <ImageBackground source = { todayImage }
                     style = { styles.background }>
                     <View style = { styles.iconBar }>
-                        <TouchableOpacity onPress = { this.toggleFilter }>
-                            <Icon name = { this.state.showDoneTasks ? 'eye-slash' : 'eye' } 
+                        <TouchableOpacity onPress = { this.toggleFilter }
+                            style = { styles.iconVisible }>
+                            <Icon name = { this.state.showDoneTasks ? 
+                                'eye-slash' : 'eye' } 
                                 size = {20}
                                 color = { commonStyles.colors.secondary }/>
                         </TouchableOpacity>
@@ -97,11 +116,26 @@ export default class TaskList extends Component {
                     </View>
                 </ImageBackground>
                 <View style = { styles.taskList }>
+                    { this.state.visibleTasks.length === 0 && this.state.tasks.length > 0 ? 
+                        <Text style = { styles.infoMessage }>
+                            Você não tem tarefas pendentes
+                        </Text> : null }
+                    { this.state.tasks.length === 0 ? 
+                        <Text style = { styles.infoMessage }>
+                            Vamos-lá! Adicione alguma tarefa
+                        </Text> : null }
                     <FlatList data = { this.state.visibleTasks } 
                         keyExtractor = { item => `${item.id}` } 
                         renderItem = { ({ item }) => 
-                            <Task { ...item } toggleTask = { this.toggleTask }/> }/>
+                            <Task { ...item } onDelete = { this.deleteTask }
+                                toggleTask = { this.toggleTask }/> }/>
                 </View>
+                <TouchableOpacity style = { styles.addTaskButton }
+                    activeOpacity = {0.7}
+                    onPress = { () => this.setState({ showAddTask: true }) }>
+                    <Icon name = "plus" size = {25} 
+                        color = { commonStyles.colors.secondary } />
+                </TouchableOpacity>
             </View>
         );
     }
