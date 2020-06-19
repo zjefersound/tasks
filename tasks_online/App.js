@@ -5,11 +5,12 @@ import {
 } from 'react-native';
 
 import TaskList from './src/screens/TaskList';
+import Auth from './src/screens/Auth';
 const App = () => {
   return (
     <>
-      <StatusBar barStyle="dark-content" />
-      <TaskList />    
+      <StatusBar backgroundColor="#000" barStyle="light-content" />
+      <Auth />    
     </>
   );
 };

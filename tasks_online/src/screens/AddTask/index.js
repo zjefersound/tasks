@@ -15,7 +15,7 @@ import moment from 'moment';
 
 //Estilos e imagens
 import styles from './styles';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import commonStyles from '../../commonStyles';
 
 const initialState = { desc: '', date: new Date(), showDatePicker: false }
