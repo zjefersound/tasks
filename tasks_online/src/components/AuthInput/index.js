@@ -9,8 +9,13 @@ import styles from './styles';
 
 export default props => {
     return (
-        <View>
-            
+        <View style = { [styles.container, props.style] }>
+            <Icon 
+                name = { props.iconName } 
+                size = {20} 
+                style = { styles.icon }
+            /> 
+            <TextInput { ...props } style = { styles.input }/>
         </View>
     );
 }

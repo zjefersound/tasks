@@ -12,6 +12,8 @@ import {
 import styles from './styles';
 import backgroundImage from '../../../assets/imgs/login.jpg';
 
+import AuthInput from '../../components/AuthInput';
+
 export default class Auth extends Component {
     state = {
         name: '',
@@ -49,29 +51,38 @@ export default class Auth extends Component {
                             }
                         </Text>
                         {this.state.stageNew &&
-                            <TextInput placeholder = "Nome." 
+                            <AuthInput 
+                                iconName = "user" 
+                                placeholder = "Nome." 
                                 value = { this.state.name }
                                 style = { styles.input }
                                 onChange = { name => this.setState({ name }) }
                             /> 
                         }
-                        <TextInput placeholder = "Email." 
+                        <AuthInput 
+                            iconName = "at" 
+                            placeholder = "Email." 
                             value = { this.state.email }
                             style = { styles.input }
                             onChange = { email => this.setState({ email }) }
                         /> 
-                        <TextInput placeholder = "Senha." 
+                        <AuthInput 
+                            iconName = "lock" 
+                            placeholder = "Senha." 
                             value = { this.state.password }
                             style = { styles.input }
                             secureTextEntry
                             onChange = { password => this.setState({ password }) }
                         />
                         {this.state.stageNew &&
-                            <TextInput placeholder = "Confirmação da Senha." 
+                            <AuthInput 
+                                iconName = "lock" 
+                                placeholder = "Confirmação da Senha." 
                                 value = { this.state.confirmPassword }
                                 style = { styles.input }
                                 secureTextEntry
-                                onChange = { confirmPassword => this.setState({ confirmPassword }) }
+                                onChange = { confirmPassword => 
+                                    this.setState({ confirmPassword }) }
                             />
                         } 
                         <TouchableOpacity 
@@ -80,7 +91,9 @@ export default class Auth extends Component {
                         >
                             <View style = { styles.button }>
                                 <Text style = { styles.buttonText }>
-                                    { this.state.stageNew ? 'Cadastrar' : 'Entrar'}
+                                    { this.state.stageNew 
+                                        ? 'Cadastrar' 
+                                        : 'Entrar'}
                                 </Text>
                             </View>
                         </TouchableOpacity>
