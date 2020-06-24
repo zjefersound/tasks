@@ -19,6 +19,8 @@ import commonStyles from '../../commonStyles';
 import moment from 'moment';
 import 'moment/locale/pt-br';
 import AsyncStorage from '@react-native-community/async-storage';
+import axios from 'axios';
+import { server, showError, showSuccess } from '../../utils';
 
 //componentes
 import Task from '../../components/Task';
@@ -39,8 +41,14 @@ export default class TaskList extends Component {
     componentDidMount = async () => {
         const stateString = await AsyncStorage.getItem('tasksState');
         const state = JSON.parse(stateString) || initialState;
-        this.setState(state, this.filterTasks );
-    }
+        this.setState({
+            showDoneTasks: this.state.showDoneTasks
+        }, this.filterTasks );
+    };
+
+    loadTasks = async () => {
+        const response = await axios.get(`${server}/tasks`)
+    };
 
     toggleFilter = () => {
         this.setState({ showDoneTasks: !this.state.showDoneTasks}, this.filterTasks);
@@ -57,7 +65,9 @@ export default class TaskList extends Component {
         }
         
         this.setState({ visibleTasks });
-        AsyncStorage.setItem('tasksState', JSON.stringify( this.state ));
+        AsyncStorage.setItem('tasksState', JSON.stringify( {
+            showDoneTasks: this.state.showDoneTasks,
+        } ));
     };
 
     toggleTask = taskId => {

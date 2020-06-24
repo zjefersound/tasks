@@ -39,6 +39,9 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center'
     },
+    buttonDisabled: {
+        backgroundColor: "#8A8",
+    },
     buttonText: {
         fontFamily: commonStyles.fontFamily,
         color: '#FFF',

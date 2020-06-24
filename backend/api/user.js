@@ -11,7 +11,7 @@ module.exports = app => {
         getHash(request.body.password, hash => {
             const password = hash;
             const { name, email } = request.body;
-            email = email.toLowerCase();
+            
             app.db('users')
                 .insert({
                     name,
