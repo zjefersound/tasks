@@ -10,13 +10,13 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     title: {
-        color: commonStyles.colors.secondary,
+        color: commonStyles.colors.secondaryImageColor,
         fontFamily: commonStyles.fontFamily,
         fontSize: 70,
         marginBottom: 20
     },
     subtitle: {
-        color: commonStyles.colors.secondary,
+        color: commonStyles.colors.secondaryImageColor,
         fontFamily: commonStyles.fontFamily,
         fontSize: 24,
         

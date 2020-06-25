@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     },  
     taskList: {
         flex: 7,
+        backgroundColor: commonStyles.colors.secondary,
     },
     titleBar: {
         flex: 1,
@@ -17,7 +18,7 @@ const styles = StyleSheet.create({
     },
     title: {
         fontFamily: commonStyles.fontFamily,
-        color: commonStyles.colors.secondary,
+        color: commonStyles.colors.secondaryImageColor,
         fontSize: 50,
         marginLeft: 20,
         marginBottom: 20,
@@ -25,20 +26,20 @@ const styles = StyleSheet.create({
     },
     subtitle: {
         fontFamily: commonStyles.fontFamily,
-        color: commonStyles.colors.secondary,
+        color: commonStyles.colors.secondaryImageColor,
         fontSize: 20,
         marginLeft: 20,
         marginBottom: 30,
     },
     iconBar: {
         flexDirection: 'row',
-        justifyContent: 'flex-end',
-        marginHorizontal: 20,
+        justifyContent: 'space-between',
+        marginHorizontal: 0,
         marginTop: Platform.OS === 'ios' ? 30 : 0
     },
     iconVisible: {
         paddingVertical: 15,
-        paddingLeft: 10,
+        paddingHorizontal: 20,
     },
     addTaskButton: {
         position: 'absolute',
@@ -53,6 +54,7 @@ const styles = StyleSheet.create({
     },
     infoMessage: {
         fontFamily: commonStyles.fontFamily,
+        color: commonStyles.colors.mainText,
         fontSize: 15,
         marginTop: 20,
         textAlign: 'center'

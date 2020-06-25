@@ -4,7 +4,7 @@ import commonStyles from '../../commonStyles';
 const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
-        borderColor: '#AAA',
+        borderColor: '#8881',
         backgroundColor: commonStyles.colors.secondary,
         borderBottomWidth: 1,
         alignItems: 'center',
