@@ -17,7 +17,7 @@ module.exports = app => {
         if ( user ) {
             bcrypt.compare(password, user.password, (err, isMatch) => {
                 if ( err || !isMatch ) {
-                    return response.status(401).send();
+                    return response.status(401).send('A senha informada é inválida');
                 }
                 
                 //Payload é o valor que vai ficar armazenado no token

@@ -8,7 +8,7 @@ const styles = StyleSheet.create({
         backgroundColor: commonStyles.colors.secondary,
         borderBottomWidth: 1,
         alignItems: 'center',
-        paddingVertical: 10,
+        paddingVertical: 16,
     },
     checkContainer: { 
         width: '20%',

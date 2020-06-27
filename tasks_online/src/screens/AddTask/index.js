@@ -50,7 +50,7 @@ export default class AddTask extends Component {
                         <View style = { styles.date_icon }>
                             <Icon name = 'calendar' 
                                 size = {20} 
-                                color = { commonStyles.colors.today }/>
+                                color = { this.props.primaryColor }/>
                         </View>
                         <Text style = { styles.date }>
                             { dateString }
@@ -62,7 +62,7 @@ export default class AddTask extends Component {
         }
         return datePicker;
     };
-
+    bgColor = { backgroundColor: this.props.primaryColor };
     render(){
         return (
             <Modal transparent = {true} visible = { this.props.isVisible }
@@ -73,9 +73,10 @@ export default class AddTask extends Component {
                     <View style = { styles.background }></View>
                 </TouchableWithoutFeedback>
                 <View style = { styles.container }>
-                    <Text style = { styles.header }>Nova tarefa</Text>
+                    <Text style = { [styles.header, this.bgColor] }>Nova tarefa</Text>
                     <TextInput style = { styles.inputText }
                         placeholder = 'Informe a descrição da tarefa...'
+                        placeholderTextColor = '#888'
                         value = { this.state.desc }
                         onChangeText = { desc => this.setState({desc}) }/>
                     {this.getDatePicker()}
@@ -84,7 +85,7 @@ export default class AddTask extends Component {
                             <Text style = { [styles.button, styles.button_cancel] }>Cancelar</Text>
                         </TouchableOpacity>
                         <TouchableOpacity onPress = { this.save }>
-                            <Text style = { styles.button }>Salvar</Text>
+                            <Text style = { [styles.button, this.bgColor] }>Salvar</Text>
                         </TouchableOpacity>
                     </View>
                 </View>

@@ -8,15 +8,16 @@ const styles = StyleSheet.create({
 
     },
     container: {
-        backgroundColor: '#FFF'
+        backgroundColor: commonStyles.colors.secondary
     },
     header: {
         fontFamily: commonStyles.fontFamily,
         backgroundColor: commonStyles.colors.today,
-        color: commonStyles.colors.secondary,
+        color: commonStyles.colors.secondaryImageColor,
         textAlign: 'center',
         padding: 15,
-        fontSize: 20
+        fontSize: 20,
+        fontWeight: 'bold'
     },  
     buttonsBar: {
         flexDirection: 'row',
@@ -30,24 +31,25 @@ const styles = StyleSheet.create({
         borderRadius: 6,
         fontFamily: commonStyles.fontFamily,
         fontWeight: 'bold',
-        color: commonStyles.colors.secondary,
+        color: commonStyles.colors.secondaryImageColor,
         backgroundColor: commonStyles.colors.today
     },
     button_cancel: {
         backgroundColor: '#7777',
-        color: commonStyles.colors.subText,
+        color: '#333',
     },
     inputText: {
         fontFamily: commonStyles.fontFamily,
+        color: commonStyles.colors.mainText,
         width: Dimensions.get('window').width - 40,
         height: 50,
         marginHorizontal: 20,
         marginTop: 20,
         borderWidth: 1,
-        borderColor: '#E3E3E3',
-        borderRadius: 6,
-        paddingLeft: 15,
-        paddingRight: 10
+        borderColor: '#8884',
+        borderRadius: 25,
+        paddingLeft: 24,
+        paddingRight: 16
     },
     dateBar: {
         margin: 20,
@@ -58,6 +60,7 @@ const styles = StyleSheet.create({
     date: {
         fontFamily: commonStyles.fontFamily,
         fontSize: 20,
+        color: commonStyles.colors.mainText
     },
     date_icon: {
         marginRight: 10,

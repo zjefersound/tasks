@@ -50,9 +50,26 @@ const styles = StyleSheet.create({
         fontWeight: 'normal',
         color: commonStyles.colors.subText,
     },
-    darkThemeText: {
-        marginLeft: 10,
+    signOut: { 
+        borderTopWidth: 1,
+        borderColor: '#8883',
+        flexDirection: 'row',
+        padding: 16
+    },
+    signOutText: {
+        color: '#C33',
+        fontFamily: commonStyles.fontFamily,
+        fontSize: 16,
+        paddingLeft: 16
+    },
+    themeText: {
         color: commonStyles.colors.mainText,
+        fontFamily: commonStyles.fontFamily,
+        fontSize: 16,
+        paddingLeft: 16
+    },
+    footer: {
+        
     }
 });
 

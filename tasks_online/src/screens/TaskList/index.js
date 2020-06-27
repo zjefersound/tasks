@@ -160,6 +160,7 @@ export default class TaskList extends Component {
         return (
             <View style = { styles.container }>
                 <AddTask isVisible = { this.state.showAddTask }
+                    primaryColor = { this.getPrimaryColor() }
                     onCancel = { () => this.setState({ showAddTask: false}) }
                     onSave = { this.addTask }/>
                 <StatusBar 

@@ -6,15 +6,16 @@ const menuConfig = {
     contentComponent: MenuDrawer,
     contentOptions: {
         labelStyle: {
-            fontFamily: commonStyles.colors.fontFamily,
+            fontFamily: commonStyles.fontFamily,
             fontWeight: 'normal',
-            fontSize: 16, 
+            fontSize: 18, 
             color: commonStyles.colors.mainText,
         },
         activeLabelStyle: {
-            fontWeight: 'bold',
-            color: '#7C7',
+            fontFamily: commonStyles.fontFamily,
+            fontWeight: 'bold', 
         },
+        activeBackgroundColor: '#8883'
     }
 };
 

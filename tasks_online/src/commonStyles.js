@@ -1,18 +1,18 @@
+const theme = { 
+    dark: true,
+}
 export default {
     fontFamily: 'Lato',
     colors: {
-        today: '#B13B44',
-        tomorrow: '#C9742E',
-        week: '#15721E',
-        month: '#1631BE',
-        secondary: '#FFF',
-        mainText: '#111',
-        subText: '#555',
+        today: '#c04848',
+        tomorrow: '#c0a548',
+        week: '#48c06d',
+        month: '#48abc0',
         secondaryImageColor: '#FFF',
 
-        secondary: '#282828',
-        mainText: '#FFF',
-        subText: '#AAA',
+        secondary: theme.dark ? '#282828' : '#FFF',
+        mainText: theme.dark ? '#FFF' : '#111',
+        subText: theme.dark ? '#AAA': '#555',
     },
     statusBarColor: {
         today: '#882828',

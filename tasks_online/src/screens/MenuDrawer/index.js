@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { 
     ScrollView, 
     View, 
@@ -12,13 +12,22 @@ import styles from './styles';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import commonStyles from '../../commonStyles';
 
+import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
+
 export default props => {
+    
     const gravatarConfig = {
         email: props.navigation.getParam('email'),
         secure: true,
     };
+    const logout = ( ) => { 
+        delete axios.defaults.headers.common['Authorization'];
+        AsyncStorage.removeItem('userData');
+        props.navigation.navigate('AuthOrApp');
+    }
     return (
-        <ScrollView style = { styles.background }>
+        <View style = { styles.background }>
             <View style = { styles.header }>
                 <View style = { styles.titleHeader }>
                     <Text style = { styles.title }>Tasks</Text>
@@ -47,7 +56,22 @@ export default props => {
                     </View>
                 </View>
             </View>
-            <DrawerItems { ...props } />
-        </ScrollView>
+            <ScrollView>
+                <DrawerItems { ...props } style= {{flex: 1}}/>
+            </ScrollView>
+            <TouchableOpacity 
+                style = { styles.footer }
+                onPress =  { logout }
+            >
+                <View style = { styles.signOut }>
+                    <Icon 
+                        name = 'sign-out' 
+                        size = {20} 
+                        color = '#C33' 
+                    /> 
+                    <Text style = { styles.signOutText }>Sair</Text>
+                </View>
+            </TouchableOpacity>
+        </View>
     );
 }

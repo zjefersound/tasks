@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import { 
     View,
     Text,
-    TextInput,
     StatusBar,
     ImageBackground,
     TouchableOpacity,
-    Alert,
 } from 'react-native';
 import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import styles from './styles';
 import backgroundImage from '../../../assets/imgs/login.png';
@@ -68,6 +67,8 @@ export default class Auth extends Component {
 
             axios.defaults.headers.common['Authorization'] = 
                 `bearer ${response.data.token}`;
+
+            AsyncStorage.setItem('userData', JSON.stringify(response.data));
             this.props.navigation.navigate('Home', response.data);
 
         } catch(exception) {
@@ -100,7 +101,7 @@ export default class Auth extends Component {
 
         return (
             <>
-                <StatusBar backgroundColor="#000" barStyle="light-content" />
+                <StatusBar backgroundColor="#69c69f" barStyle="light-content" />
                 <ImageBackground 
                     source = { backgroundImage } 
                     style = { styles.container }

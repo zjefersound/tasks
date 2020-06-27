@@ -8,7 +8,11 @@ const server = Platform.OS === 'ios'
     : 'http://10.0.2.2:3000';
 
 function showError(err) {
-    Alert.alert('Ops! Ocorreu um problema', `${err}`);
+    if (err.response && err.response.data) {
+        Alert.alert('Ops! Ocorreu um problema', `${err.response.data}`);
+    }else{
+        Alert.alert('Ops! Erro inesperado', `${err}`);
+    }
 }
 
 function showSuccess(msg) {

@@ -27,9 +27,10 @@ const styles = StyleSheet.create({
         height: 48
     },
     formContainer: {
-        backgroundColor: "#0006",
+        backgroundColor: "#0003",
         padding: 20,
-        width: '90%'
+        width: '90%',
+        borderRadius: 20
     },
     button: {
         backgroundColor: "#0A0",
@@ -50,8 +51,8 @@ const styles = StyleSheet.create({
     toggleMethod: {
         padding: 10,
         fontFamily: commonStyles.fontFamily,
-        color: '#0A0',
-        fontSize: 18
+        color: '#FFF',
+        fontSize: 20
     }
     
 });
